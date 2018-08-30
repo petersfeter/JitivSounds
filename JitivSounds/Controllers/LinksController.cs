@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JitivSounds.Data;
 using JitivSounds.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JitivSounds.Controllers
 {
@@ -28,6 +29,7 @@ namespace JitivSounds.Controllers
 
 
         // GET: Links/Create
+        [Authorize]
         public IActionResult Create()
         {
             return PartialView();
@@ -54,6 +56,7 @@ namespace JitivSounds.Controllers
         
 
         // GET: Links/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -71,7 +74,7 @@ namespace JitivSounds.Controllers
             return PartialView(link);
         }
 
-        // POST: Links/Delete/5
+        // POST: Links/Delete/5        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -86,5 +89,36 @@ namespace JitivSounds.Controllers
         {
             return _context.Links.Any(e => e.Id == id);
         }
+        
+        public async Task<IActionResult> CountLikes(int linkId, bool lajk)
+        {
+            var linkrate = new LinkRate
+            {
+                LinkId = linkId,
+                Like = lajk,
+                UserId = this.User.GetUserId()
+            };
+            
+            _context.Add(linkrate);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+        public async Task<IActionResult> CountDislikes(int linkId, bool lajk)
+        {
+            var linkrate = new LinkRate
+            {
+                LinkId = linkId,
+                Like = lajk,
+                UserId = this.User.GetUserId()
+            };
+
+
+            _context.Add(linkrate);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
     }
 }

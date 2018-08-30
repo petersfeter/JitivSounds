@@ -16,68 +16,11 @@
 <hr />
 
 
-@*<div class="table-responsive" :>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DateCreated)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Linkyt)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UserID)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Counter)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.LastPlayed)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            </div>
-
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateCreated)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Linkyt)
-                            Title
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Counter)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LastPlayed)
-                        </td>
-                        <td>
-                            <button id="btnShowModal" type="button" data-id="@item.Id"
-                                    class="btn btn-sm btn-danger btn-delete">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>*@
 <div>    
     @foreach (var item in Model)
     {
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div class="row" id="linkid" data-id="@item.Id">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" >
                 <p>@item.DateCreated</p>
                 <p>Thumbnail</p>
             </div>
@@ -88,10 +31,10 @@
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                 <p>
-                    <button type="button" class="btn btn-success btn-sm like" >
+                    <button type="button" class="btn btn-success btn-sm like" value="true" data-id="@item.UserId">
                         <span class="glyphicon glyphicon-thumbs-up"></span>
                     </button>
-                    <button type="button" class="btn btn-danger btn-sm dislike">
+                    <button type="button" class="btn btn-danger btn-sm dislike" value="false">
                         <span class="glyphicon glyphicon-thumbs-down"></span>
                     </button>
                 </p>
@@ -125,4 +68,5 @@
 
 @section Scripts {
     <script src="~/js/LinkOptions.js"></script>
+    <script src="~/js/Rating.js"></script>
 }

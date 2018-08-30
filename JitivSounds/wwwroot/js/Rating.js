@@ -1,26 +1,32 @@
 ﻿$(document).ready(function () {
-    $(function () {
-        $('.like').click(function () { likeFunction(this); });
-        $('.dislike').click(function () { dislikeFunction(this); });
-    });
 
+    $(document).on('click', '.like', (function () {
 
-    function likeFunction(caller) {
-        var postId = caller.parentElement.getAttribute('postid');
+        var UserId = $(this).data('id');
+        var LinkId = $('#linkid').data('id');
+
         $.ajax({
-            type: "POST",
-            url: "rate.php",
-            data: 'Action=LIKE&PostID=' + postId,
-            success: function () { }
+            url: '/Links/CountLikes?linkId=' + LinkId + '&lajk=' + true ,
+            type: 'GET',
+            
+            success: function () {
+                                
+            }
         });
-    }
-    function dislikeFunction(caller) {
-        var postId = caller.parentElement.getAttribute('postid');
+    }));
+    $(document).on('click', '.dislike', (function () {
+
+        var UserId = $(this).data('id');
+        var LinkId = $('#linkid').data('id');
+
         $.ajax({
-            type: "POST",
-            url: "rate.php",
-            data: 'Action=DISLIKE&PostID=' + postId,
-            success: function () { }
+            url: '/Links/CountDislikes?linkId=' + LinkId + '&lajk=' + false,
+            type: 'GET',
+
+            success: function () {
+
+            }
         });
-    }
+    }));
+
 });

@@ -20,5 +20,6 @@ namespace JitivSounds.Models
         public string UserId { get; set; }
 
         public bool  Like { get; set; }
+        
     }
 }
