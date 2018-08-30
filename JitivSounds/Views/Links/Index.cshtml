@@ -1,0 +1,128 @@
+﻿@model IEnumerable<JitivSounds.Models.Link>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Links</h2>
+
+<p>
+    <button id="btnCreateModal" type="button"
+            class="btn btn-primary btn-create">
+        Add Link
+    </button>
+
+</p>
+<hr />
+
+
+@*<div class="table-responsive" :>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateCreated)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Linkyt)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Counter)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastPlayed)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            </div>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreated)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Linkyt)
+                            Title
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Counter)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastPlayed)
+                        </td>
+                        <td>
+                            <button id="btnShowModal" type="button" data-id="@item.Id"
+                                    class="btn btn-sm btn-danger btn-delete">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@
+<div>    
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <p>@item.DateCreated</p>
+                <p>Thumbnail</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <a href="@item.Linkyt" >@item.Linkyt</a>
+                <p>Title</p>
+                <p>@item.User?.UserName</p>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <p>
+                    <button type="button" class="btn btn-success btn-sm like" >
+                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm dislike">
+                        <span class="glyphicon glyphicon-thumbs-down"></span>
+                    </button>
+                </p>
+                <p>@item.Counter</p>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                <p>@item.LastPlayed</p>
+            </div>            
+        </div>
+    }
+</div>
+
+
+
+
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-notify" role="document">
+        <div class="modal-content panel-warning">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CreateModal" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-notify" role="document">
+        <div class="modal-content panel-warning">
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/LinkOptions.js"></script>
+}

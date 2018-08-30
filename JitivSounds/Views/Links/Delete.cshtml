@@ -1,0 +1,55 @@
+﻿@model JitivSounds.Models.Link
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h2 class="modal-title">Delete</h2>
+    <h4>Y u do dis?</h4>
+</div>
+<div>
+    <h4>Link</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Linkyt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Linkyt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Counter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Counter)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastPlayed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastPlayed)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        
+    </form>
+</div>

@@ -1,0 +1,33 @@
+﻿@model JitivSounds.Models.Link
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h2 class="modal-title">Add Link</h2>
+</div>
+<div class="table table-responsive ">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Linkyt" class="control-label">YouTube Link</label>
+                <input asp-for="Linkyt" class="form-control" />
+                <span asp-validation-for="Linkyt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
