@@ -32,15 +32,20 @@
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                 <p>
                     <button type="button" class="btn btn-success btn-sm like" value="true" data-id="@item.UserId">
-                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                        <span class="glyphicon glyphicon-thumbs-up"></span>@item.LinkRates.Count(x=> x.Like)
                     </button>
                     <button type="button" class="btn btn-danger btn-sm dislike" value="false">
-                        <span class="glyphicon glyphicon-thumbs-down"></span>
+                        <span class="glyphicon glyphicon-thumbs-down"></span>@item.LinkRates.Count(x => !x.Like)
                     </button>
                 </p>
                 <p>@item.Counter</p>
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                <p>
+                    <button type="button" class="btn-sm btn-warning btn-delete" value="false">
+                        <span class="glyphicon glyphicon-erase"></span>
+                    </button>
+                </p>
                 <p>@item.LastPlayed</p>
             </div>            
         </div>

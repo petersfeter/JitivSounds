@@ -10,7 +10,7 @@ using JitivSounds.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace JitivSounds.Controllers
-{
+{   [Authorize]
     public class LinksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -29,7 +29,7 @@ namespace JitivSounds.Controllers
 
 
         // GET: Links/Create
-        [Authorize]
+        
         public IActionResult Create()
         {
             return PartialView();
@@ -42,6 +42,11 @@ namespace JitivSounds.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Linkyt")] Link link)
         {
+            if (await IsLinkInDatabase(link.Linkyt) == true)
+            {
+                ModelState.AddModelError("Linkyt", "Ten link jest już na liście");                
+            }
+
             if (ModelState.IsValid)
             {
                 link.DateCreated = DateTime.Now;
@@ -50,13 +55,23 @@ namespace JitivSounds.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+
             return View(link);
         }
 
-        
+        private async Task<bool> IsLinkInDatabase(string linkyt)
+        {            
+            var Inbase = await _context.Links.FirstOrDefaultAsync(x => x.Linkyt == linkyt);
+            if (Inbase != null)
+                return true;
+            else return false;            
+        }
+
+
 
         // GET: Links/Delete/5
-        [Authorize]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -98,6 +113,7 @@ namespace JitivSounds.Controllers
                 Like = lajk,
                 UserId = this.User.GetUserId()
             };
+            
             
             _context.Add(linkrate);
             await _context.SaveChangesAsync();
