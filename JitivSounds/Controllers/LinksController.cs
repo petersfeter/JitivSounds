@@ -105,35 +105,44 @@ namespace JitivSounds.Controllers
             return _context.Links.Any(e => e.Id == id);
         }
         
-        public async Task<IActionResult> CountLikes(int linkId, bool lajk)
+        public async Task<IActionResult> CountLikes(int linkId, bool like)
         {
+            
+
             var linkrate = new LinkRate
             {
                 LinkId = linkId,
-                Like = lajk,
+                Like = like,
                 UserId = this.User.GetUserId()
-            };
-            
-            
+            };            
+
+
             _context.Add(linkrate);
+
             await _context.SaveChangesAsync();
 
-            return Ok();
+            int howManyLikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == like);
+
+            return Ok(howManyLikes);
         }
-        public async Task<IActionResult> CountDislikes(int linkId, bool lajk)
+        
+
+        public async Task<IActionResult> CountDislikes(int linkId, bool like)
         {
-            var linkrate = new LinkRate
+            var linkrate = new LinkRate()
             {
                 LinkId = linkId,
-                Like = lajk,
+                Like = like,
                 UserId = this.User.GetUserId()
             };
 
-
             _context.Add(linkrate);
+
             await _context.SaveChangesAsync();
 
-            return Ok();
+            int howManyDislikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == like);
+
+            return Ok(howManyDislikes);
         }
 
     }
