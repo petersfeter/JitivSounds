@@ -37,7 +37,7 @@
                     </button>
                     <button type="submit" id="dislike-@item.Id" class="btn btn-danger btn-sm dislike @(item.LinkRates.Any(x => x.UserId == User.GetUserId())?"disabled":"")" data-value="false" data-id="@item.Id">
                         <span class="glyphicon glyphicon-thumbs-down"></span>
-                       <span class="dislike-count-@item.Id">@item.LinkRates.Count(x => !x.Like)</span>
+                        <span class="dislike-count-@item.Id">@item.LinkRates.Count(x => !x.Like)</span>
                     </button>
                 </p>
                 <p>@item.Counter</p>
