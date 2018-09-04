@@ -14,7 +14,8 @@
                 type: 'GET',
 
                 //success: (function (e) {
-                //    $('#like-' + LinkId).text(e);
+                //    $('.like-count-' + LinkId)[0].innerText = e;
+                //    event.preventDefault();
                 //})
             })
         }
@@ -25,7 +26,7 @@
         //var UserId = $(this).data('id');
         var LinkId = $(this).data('id');
 
-        if (!($('#like-' + LinkId).hasClass('disabled'))) {
+        if (!($('#dislike-' + LinkId).hasClass('disabled'))) {
             event.preventDefault();
 
 

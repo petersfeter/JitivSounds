@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     $('.btn-delete').click(function (e) {
-        var delId = $('#linkid').attr("data-id");
+        var delId = $(this).data("id");
 
         e.preventDefault();
         $.ajax({

@@ -4,14 +4,14 @@
         var LinkId = $(this).data('id');
         var rawlink = $('#ytlink-' + LinkId)[0].href;
         
-        console.log(LinkId);
+        //console.log(LinkId);
 
         var videoid = rawlink.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
             
         if (videoid != null) {
-            console.log("video id = ", videoid[1]);
+           // console.log("video id = ", videoid[1]);
         } else {
-            console.log("The youtube url is not valid.");
+            alert("The youtube url is not valid.");
         }
         
 
