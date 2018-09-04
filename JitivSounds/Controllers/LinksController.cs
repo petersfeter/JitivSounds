@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using JitivSounds.Data;
 using JitivSounds.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
+using System.Web;
 
 namespace JitivSounds.Controllers
-{   [Authorize]
+{
+    [Authorize]
     public class LinksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,14 +25,14 @@ namespace JitivSounds.Controllers
 
         // GET: Links
         public async Task<IActionResult> Index()
-        {            
-            return View(await _context.Links.Include(x=> x.User).Include(x => x.LinkRates).ToListAsync());
+        {
+            return View(await _context.Links.Include(x => x.User).Include(x => x.LinkRates).ToListAsync());
         }
-        
+
 
 
         // GET: Links/Create
-        
+
         public IActionResult Create()
         {
             return PartialView();
@@ -44,7 +47,7 @@ namespace JitivSounds.Controllers
         {
             if (await IsLinkInDatabase(link.Linkyt) == true)
             {
-                ModelState.AddModelError("Linkyt", "Ten link jest już na liście");                
+                ModelState.AddModelError("Linkyt", "Ten link jest już na liście");
             }
 
             if (ModelState.IsValid)
@@ -61,11 +64,11 @@ namespace JitivSounds.Controllers
         }
 
         private async Task<bool> IsLinkInDatabase(string linkyt)
-        {            
+        {
             var Inbase = await _context.Links.FirstOrDefaultAsync(x => x.Linkyt == linkyt);
             if (Inbase != null)
                 return true;
-            else return false;            
+            else return false;
         }
 
 
@@ -104,17 +107,17 @@ namespace JitivSounds.Controllers
         {
             return _context.Links.Any(e => e.Id == id);
         }
-        
+
         public async Task<IActionResult> CountLikes(int linkId, bool like)
         {
-            
+
 
             var linkrate = new LinkRate
             {
                 LinkId = linkId,
                 Like = like,
                 UserId = this.User.GetUserId()
-            };            
+            };
 
 
             _context.Add(linkrate);
@@ -125,7 +128,7 @@ namespace JitivSounds.Controllers
 
             return Ok(howManyLikes);
         }
-        
+
 
         public async Task<IActionResult> CountDislikes(int linkId, bool like)
         {
@@ -144,6 +147,5 @@ namespace JitivSounds.Controllers
 
             return Ok(howManyDislikes);
         }
-
     }
 }

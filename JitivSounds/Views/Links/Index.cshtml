@@ -19,14 +19,14 @@
 <div>    
     @foreach (var item in Model)
     {
-        <div class="row" id="linkid" data-id="@item.Id">
+        <div class="row video-row" id="linkid" data-id="@item.Id">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" >
                 <p>@item.DateCreated</p>
-                <p>Thumbnail</p>
+                <p id="thumbnail-@item.Id"></p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <a href="@item.Linkyt" >@item.Linkyt</a>
-                <p>Title</p>
+                <a id="ytlink-@item.Id" href="@item.Linkyt" >Link</a>
+                <p id="yttitle-@item.Id"></p>
                 <p>@item.User?.UserName</p>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
@@ -74,4 +74,5 @@
 @section Scripts {
     <script src="~/js/LinkOptions.js"></script>
     <script src="~/js/Rating.js"></script>
+    <script src="~/js/YoutubeTT.js"></script>
 }
