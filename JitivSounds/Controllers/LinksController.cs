@@ -110,42 +110,86 @@ namespace JitivSounds.Controllers
 
         public async Task<IActionResult> CountLikes(int linkId, bool like)
         {
-
+            var userId = this.User.GetUserId();
+            var result = new Dictionary<string, int>();
+            int howManyLikes = 0;
+            int howManyDislikes = 0;
+            var alreadyClicked = await _context.LinkRates.FirstOrDefaultAsync(x => x.LinkId == linkId && x.UserId == userId);
 
             var linkrate = new LinkRate
             {
                 LinkId = linkId,
                 Like = like,
-                UserId = this.User.GetUserId()
+                UserId = userId
             };
 
+            if (alreadyClicked != null)
+            {
+                _context.LinkRates.Remove(alreadyClicked);
+                if (alreadyClicked.Like == false)
+                {
+                    _context.Add(linkrate);
+                }
+                await _context.SaveChangesAsync();
+                howManyLikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == true);
+                howManyDislikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == false);
+                result.Add("howManyLikes", howManyLikes);
+                result.Add("howManyDislikes", howManyDislikes);
+                return Ok(result);
+            }
 
             _context.Add(linkrate);
 
             await _context.SaveChangesAsync();
 
-            int howManyLikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == like);
+            howManyLikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == true);
+            howManyDislikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == false);
+            result.Add("howManyLikes", howManyLikes);
+            result.Add("howManyDislikes", howManyDislikes);
 
-            return Ok(howManyLikes);
+            return Ok(result);
         }
 
 
         public async Task<IActionResult> CountDislikes(int linkId, bool like)
         {
+            var userId = this.User.GetUserId();
+            var result = new Dictionary<string, int>();
+            int howManyDislikes = 0;
+            int howManyLikes = 0;
+            var alreadyClicked = await _context.LinkRates.FirstOrDefaultAsync(x => x.LinkId == linkId && x.UserId == userId);
+
             var linkrate = new LinkRate()
             {
                 LinkId = linkId,
                 Like = like,
-                UserId = this.User.GetUserId()
+                UserId = userId
             };
+
+            if (alreadyClicked != null)
+            {
+                _context.LinkRates.Remove(alreadyClicked);
+                if (alreadyClicked.Like == true)
+                {
+                    _context.Add(linkrate);
+                }
+                await _context.SaveChangesAsync();
+                howManyLikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == true);
+                howManyDislikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == false);
+                result.Add("howManyLikes", howManyLikes);
+                result.Add("howManyDislikes", howManyDislikes);
+                return Ok(result);
+            }
 
             _context.Add(linkrate);
 
             await _context.SaveChangesAsync();
 
-            int howManyDislikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == like);
-
-            return Ok(howManyDislikes);
+            howManyLikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == true);
+            howManyDislikes = _context.LinkRates.Count(x => x.LinkId == linkId && x.Like == false);
+            result.Add("howManyLikes", howManyLikes);
+            result.Add("howManyDislikes", howManyDislikes);
+            return Ok(result);
         }
     }
 }

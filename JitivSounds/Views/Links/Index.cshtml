@@ -31,11 +31,11 @@
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                 <p>
-                    <button type="submit" id="like-@item.Id" class="btn btn-success btn-sm like @(item.LinkRates.Any(x => x.UserId == User.GetUserId())?"disabled":"")" data-value="true" data-id="@item.Id">
+                    <button type="submit" id="like-@item.Id" class="btn btn-success btn-sm like" data-value="true" data-id="@item.Id">
                         <span class="glyphicon glyphicon-thumbs-up"></span>
                         <span class="like-count-@item.Id">@item.LinkRates.Count(x => x.Like)</span>
                     </button>
-                    <button type="submit" id="dislike-@item.Id" class="btn btn-danger btn-sm dislike @(item.LinkRates.Any(x => x.UserId == User.GetUserId())?"disabled":"")" data-value="false" data-id="@item.Id">
+                    <button type="submit" id="dislike-@item.Id" class="btn btn-danger btn-sm dislike" data-value="false" data-id="@item.Id">
                         <span class="glyphicon glyphicon-thumbs-down"></span>
                         <span class="dislike-count-@item.Id">@item.LinkRates.Count(x => !x.Like)</span>
                     </button>
