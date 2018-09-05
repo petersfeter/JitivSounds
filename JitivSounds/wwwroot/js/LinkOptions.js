@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
 
     $('.btn-delete').click(function (e) {
         var delId = $(this).data("id");
@@ -20,7 +21,7 @@
     });
 
     $('.btn-create').click(function (e) {
-        
+
         e.preventDefault();
         $.ajax({
 
@@ -36,5 +37,7 @@
             error: function (e) { }
         });
     });
-
+    
+        
+   
 });

@@ -1,0 +1,21 @@
+{
+  "name": "JitivSounds",
+  "authors": [
+    "Piotr Decowski <decowski.piotr9@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "tooltip.js": "https://unpkg.com/tooltip.js"
+  }
+}

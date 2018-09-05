@@ -26,8 +26,8 @@
 
             success: (function (e) {
                 $('.like-count-' + LinkId)[0].innerText = e.howManyLikes;
-                $('.dislike-count-' + LinkId)[0].innerText = e.howManyDislikes;            })
-
+                $('.dislike-count-' + LinkId)[0].innerText = e.howManyDislikes;
+            })
         });
     }));
 });
